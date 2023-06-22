@@ -33,6 +33,7 @@ article {
     letter-spacing: var(--letter-spacing);
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: var(--primary-900)
   }
   span {
