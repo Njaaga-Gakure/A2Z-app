@@ -1,6 +1,12 @@
 import { createContext, useContext, useReducer } from "react";
 import reducer from "../reducers/cart_reducer";
-import { ADD_TO_CART } from "../action";
+import { 
+            ADD_TO_CART, 
+            REMOVE_CART_ITEM, 
+            CLEAR_CART, 
+            TOGGLE_CART_ITEM_AMOUNT, 
+            COUNT_CART_TOTAL 
+        } from "../action";
 import { useEffect } from "react";
 
 const getLocalStorage = () => {
@@ -21,13 +27,20 @@ const CartProvider = ({children}) => {
         dispatch({type: ADD_TO_CART, payload: {id, color, amount, product}})
     }
      // remove item 
-    const removeItem = (id) => {}  
+    const removeItem = (id) => {
+        dispatch({type: REMOVE_CART_ITEM, payload: id})
+    }  
     // toggle amount
-    const toggleAmount = (id, value) => {}  
+    const toggleAmount = (id, value) => {
+        dispatch({type: TOGGLE_CART_ITEM_AMOUNT, payload: {id, value}})
+    }  
     // clear cart
-    const clearCart = () => {}
+    const clearCart = () => {
+        dispatch({type: CLEAR_CART})
+    }
 
     useEffect(() =>{
+        dispatch({ type: COUNT_CART_TOTAL })
         localStorage.setItem('cart', JSON.stringify(state.cart))
     }, [state.cart] )
     return (

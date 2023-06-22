@@ -14,17 +14,19 @@ const AmountButtons = ({increase, decrease, amount}) => {
   )
 }
 const Wrapper = styled.div`
+    width: 100px;
     margin-top: .5rem;
     color: var(--gray-800);
     display: flex;
     align-items: center;
+    justify-content: space-between;
     button {
         border-color: transparent;
         background: transparent;
         cursor: pointer;
         svg {
-            color: var(--primary-900);
-            font-size: 2rem;
+            color: var(--gray-700);
+            font-size: 1.25rem;
         }
     }
     h2 {

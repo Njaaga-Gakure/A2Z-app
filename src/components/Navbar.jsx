@@ -43,7 +43,7 @@ const Nav = styled.nav`
     place-items: center;
     .nav-center {
         width: 90vw;
-        max-width: 900px;
+        max-width: 950px;
     }
     .nav-header {
         display: flex;
