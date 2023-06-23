@@ -4,8 +4,9 @@ import {CiMenuBurger} from 'react-icons/ci';
 import {Link} from 'react-router-dom';
 import { links } from '../utils/data';
 import { useProductsContext } from '../contexts/products_context';
-
+import { useUserContext } from '../contexts/user_context';
 const Navbar = () => {
+    const { myUser } = useUserContext()
     const { openSidebar } = useProductsContext()
     return (
         <Nav>
@@ -28,6 +29,13 @@ const Navbar = () => {
                              </li>
                         )
                     })}
+                   { myUser && (  
+                     <li>
+                        <Link to='/checkout'>
+                            checkout
+                        </Link>
+                     </li> 
+                    )}
                 </ul>
                 <CartButtons />
             </div>

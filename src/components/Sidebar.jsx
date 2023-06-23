@@ -4,9 +4,11 @@ import {Link} from 'react-router-dom'
 import {RxCross1} from 'react-icons/rx'
 import { links } from '../utils/data'
 import { useProductsContext } from "../contexts/products_context"
+import { useUserContext } from "../contexts/user_context"
 
 const Sidebar = () => {
   const {isSidebarOpen, closeSidebar} = useProductsContext()
+  const { myUser } = useUserContext()
   return (
     <Wrapper>
       <aside className={isSidebarOpen ? "sidebar show-sidebar" : 'sidebar'}>
@@ -28,11 +30,13 @@ const Sidebar = () => {
                 </li> 
               )
             })}
-            <li>
-              <Link onClick={closeSidebar} to='/checkout'>
-                checkout
-              </Link>
-            </li>
+            { myUser && (
+                <li>
+                  <Link onClick={closeSidebar} to='/checkout'>
+                    checkout
+                  </Link>
+                </li> 
+              )}
           </ul>
           <div className="center-cart-btn">
             <CartButtons />

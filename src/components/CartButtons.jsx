@@ -3,11 +3,12 @@ import { TiShoppingCart, TiUserAdd, TiUserDelete} from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 import { useProductsContext } from "../contexts/products_context"
 import { useCartContext } from "../contexts/cart_context"
+import { useUserContext } from "../contexts/user_context"
 
 const CartButtons = () => {
   const { closeSidebar } = useProductsContext()
   const { total_items } = useCartContext() 
- 
+  const { loginWithRedirect, logout, myUser } = useUserContext()  
   return (
    <Wrapper className="cart-btn-wrapper">
         <Link onClick={closeSidebar} to='/cart'> 
@@ -17,9 +18,20 @@ const CartButtons = () => {
                 <span className="cart-value">{total_items}</span>
             </span>
         </Link>
-        <button className="auth-btn">
-            Login<TiUserAdd />
-        </button>
+        { !myUser ? <button 
+                        className="auth-btn"
+                        onClick={loginWithRedirect}
+                        >
+                            Login<TiUserAdd />
+                        </button> :
+                        <button
+                            className="auth-btn"
+                            onClick={() => {
+                                logout({ logoutParams: { returnTo: window.location.origin } })
+                            }}
+                        >
+                            Logout<TiUserDelete />
+                        </button> }
    </Wrapper>
   )
 }
